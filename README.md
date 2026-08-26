@@ -26,3 +26,20 @@ Criar legendas de Instagram para cada novo produto manualmente é repetitivo: é
 | Notificação | Gmail |
 
 ## 📂 Estrutura do repositório
+
+## ▶️ Como rodar
+
+1. Clone este repositório.
+2. Importe o arquivo `workflow/caption-agent.json` no seu n8n.
+3. Configure suas próprias credenciais (Google Sheets, Google Gemini, Gmail).
+4. Ajuste a referência da planilha para a sua própria.
+5. Publique o workflow e adicione um produto na planilha para testar.
+
+## 🚧 Próximos passos
+
+- Publicação automática no Instagram via Graph API
+- Fluxo de aprovação antes da publicação
+
+## 📄 Licença
+
+Este projeto é livre para uso e estudo (MIT License).
