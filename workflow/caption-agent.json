@@ -1,5 +1,11 @@
 {
+  "updatedAt": "2026-08-27T00:52:44.882Z",
+  "createdAt": "2026-08-24T22:59:16.168Z",
+  "id": "ZLYwv9Eue3Rja5mC",
   "name": "Gerador de Legendas IA",
+  "description": null,
+  "active": true,
+  "isArchived": false,
   "nodes": [
     {
       "parameters": {
@@ -96,7 +102,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        816,
+        800,
         0
       ],
       "id": "378368f6-2440-40ea-a832-3bf7c65f7367",
@@ -112,7 +118,7 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        1040,
+        1024,
         0
       ],
       "id": "06d52e45-8678-49a7-a2a2-42baa59cb0d2",
@@ -232,7 +238,7 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        1264,
+        1248,
         0
       ],
       "id": "7e799cbd-1617-4b64-814c-1f5a66ad57f4",
@@ -243,9 +249,68 @@
           "name": "Google Sheets account"
         }
       }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "   https://graph.instagram.com/v21.0/17841476701574565/media",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "image_url",
+              "value": "https://i.imgur.com/s5Vg3qO.jpeg"
+            },
+            {
+              "name": "caption",
+              "value": "={{ $('Code in Python1').item.json.legenda_final }}"
+            },
+            {
+              "name": "access_token",
+              "value": "SEU_TOKEN_AQUI"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        1472,
+        0
+      ],
+      "id": "17be8f9e-fa4f-431a-80fb-22f080689cc1",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "   https://graph.instagram.com/v21.0/17841476701574565/media_publish",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "creation_id",
+              "value": "={{ $json.id }}"
+            },
+            {
+              "name": "access_token",
+              "value": "=SEU_TOKEN_AQUI"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        1696,
+        0
+      ],
+      "id": "8ac0e8cc-1fdd-4b19-9f37-653672f11571",
+      "name": "HTTP Request1"
     }
   ],
-  "pinData": {},
   "connections": {
     "Google Sheets Trigger": {
       "main": [
@@ -301,19 +366,538 @@
           }
         ]
       ]
+    },
+    "Update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
-  "active": true,
   "settings": {
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "3166dd02-c2a7-4d6e-855b-5128634e14b3",
+  "staticData": {
+    "node:Google Sheets Trigger": {
+      "documentId": "1Q1PMztSazCau03ecJljUa8KQaHhKKFpa0bVCsaV3O88",
+      "sheetId": 0,
+      "lastRevision": 106,
+      "lastRevisionLink": "https://docs.google.com/spreadsheets/export?id=1Q1PMztSazCau03ecJljUa8KQaHhKKFpa0bVCsaV3O88&revision=106&exportFormat=xlsx"
+    }
+  },
   "meta": {
-    "templateCredsSetupCompleted": true,
-    "instanceId": "e4e843e29c74204c8a404dfdc650df3309f8aba2255206d741d03eb56a93dd77"
+    "templateCredsSetupCompleted": true
   },
   "nodeGroups": [],
-  "id": "ZLYwv9Eue3Rja5mC",
-  "tags": []
+  "pinData": {},
+  "versionId": "fc765111-0b77-47ed-8f73-f5d15d410af6",
+  "activeVersionId": "fc765111-0b77-47ed-8f73-f5d15d410af6",
+  "versionCounter": 218,
+  "triggerCount": 1,
+  "sourceWorkflowId": null,
+  "tags": [],
+  "parentFolder": null,
+  "activeVersion": {
+    "updatedAt": "2026-08-27T00:54:20.000Z",
+    "createdAt": "2026-08-27T00:52:44.883Z",
+    "versionId": "fc765111-0b77-47ed-8f73-f5d15d410af6",
+    "workflowId": "ZLYwv9Eue3Rja5mC",
+    "nodes": [
+      {
+        "parameters": {
+          "pollTimes": {
+            "item": [
+              {
+                "mode": "everyMinute"
+              }
+            ]
+          },
+          "documentId": {
+            "__rl": true,
+            "value": "1Q1PMztSazCau03ecJljUa8KQaHhKKFpa0bVCsaV3O88",
+            "mode": "list",
+            "cachedResultName": "Produtos BStech",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Q1PMztSazCau03ecJljUa8KQaHhKKFpa0bVCsaV3O88/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Página1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Q1PMztSazCau03ecJljUa8KQaHhKKFpa0bVCsaV3O88/edit#gid=0"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheetsTrigger",
+        "typeVersion": 1,
+        "position": [
+          0,
+          0
+        ],
+        "id": "bea8ea11-2f65-4c26-951d-cedd2f9a3daf",
+        "name": "Google Sheets Trigger",
+        "credentials": {
+          "googleSheetsTriggerOAuth2Api": {
+            "id": "JNFYtzvfBAD5Xc2H",
+            "name": "Google Sheets Trigger account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "language": "pythonNative",
+          "pythonCode": "produto = {\n    \"nome\": _items[0][\"json\"][\"nome\"],\n    \"preco\": float(_items[0][\"json\"][\"preco\"]),\n    \"preco_promocional\": float(_items[0][\"json\"].get(\"preco_promo\", 0) or 0),\n    \"categoria\": _items[0][\"json\"][\"Categoria\"],\n    \"caracteristicas\": _items[0][\"json\"][\"caracteristicas\"],\n}\n\nreturn [{\"json\": produto}]"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          224,
+          0
+        ],
+        "id": "33917ed4-8292-49d4-9702-263aaa878395",
+        "name": "Code in Python"
+      },
+      {
+        "parameters": {
+          "modelId": {
+            "__rl": true,
+            "mode": "list",
+            "value": "models/gemini-3-flash-preview"
+          },
+          "messages": {
+            "values": [
+              {
+                "content": "=Você é o redator oficial da BStech, uma empresa de tecnologia especializada em sistemas, sites e soluções digitais. Escreva uma legenda de Instagram para o produto/serviço abaixo, seguindo EXATAMENTE este formato:\n\n1. Nome da BStech + título do produto/serviço em negrito\n2. Um parágrafo curto de descrição, destacando o valor e o problema que resolve para o cliente\n3. Lista de características/benefícios (uma por linha, com emoji de check)\n4. Preço com desconto (preço cheio riscado + preço promocional)\n5. Formas de pagamento e parcelamento\n6. Hashtags no final: #bstech #tecnologia #sites + 2 hashtags relacionadas à categoria do produto\n\nDados do produto:\nNome: {{ $json.nome }}\nPreço: R$ {{ $json.preco }}\nPreço promocional: R$ {{ $json.preco_promocional }}\nCategoria: {{ $json.categoria }}\nCaracterísticas: {{ $json.caracteristicas }}"
+              }
+            ]
+          },
+          "jsonOutput": true,
+          "builtInTools": {},
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.googleGemini",
+        "typeVersion": 1.2,
+        "position": [
+          448,
+          0
+        ],
+        "id": "bb7ef82e-858e-4b34-91e3-913dfc3025d1",
+        "name": "Message a model",
+        "credentials": {
+          "googlePalmApi": {
+            "id": "8J14e3oyC3wBSbxl",
+            "name": "Google Gemini(PaLM) Api account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "language": "pythonNative",
+          "pythonCode": "texto = _items[0][\"json\"][\"content\"][\"parts\"][0][\"text\"].strip()\n\n# garante que não passa do limite do Instagram (2.200 caracteres)\nif len(texto) > 2200:\n    texto = texto[:2190] + \"...\"\n\n# garante que as hashtags da BStech estão presentes\nif \"#bstech\" not in texto.lower():\n    texto += \"\\n\\n#bstech #tecnologia #sites\"\n\nreturn [{\"json\": {\"legenda_final\": texto}}]"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          800,
+          0
+        ],
+        "id": "378368f6-2440-40ea-a832-3bf7c65f7367",
+        "name": "Code in Python1"
+      },
+      {
+        "parameters": {
+          "sendTo": "brunosantosmo5@gmail.com",
+          "subject": "=Legenda pronta - BStech",
+          "message": "={{ $json.legenda_final }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.2,
+        "position": [
+          1024,
+          0
+        ],
+        "id": "06d52e45-8678-49a7-a2a2-42baa59cb0d2",
+        "name": "Send a message",
+        "webhookId": "45851a11-3078-4a7b-b24d-a1424be1a946",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "bZPEofkLC8ouPYHh",
+            "name": "Gmail account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "documentId": {
+            "__rl": true,
+            "value": "1Q1PMztSazCau03ecJljUa8KQaHhKKFpa0bVCsaV3O88",
+            "mode": "list",
+            "cachedResultName": "Produtos BStech",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Q1PMztSazCau03ecJljUa8KQaHhKKFpa0bVCsaV3O88/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Página1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Q1PMztSazCau03ecJljUa8KQaHhKKFpa0bVCsaV3O88/edit#gid=0"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "nome": "={{ $('Code in Python').item.json.nome }}",
+              "status": "gerado",
+              "preco": "={{ $('Code in Python').item.json.preco }}",
+              "preco_promo": "={{ $('Code in Python').item.json.preco_promocional }}",
+              "Categoria": "={{ $('Code in Python').item.json.categoria }}",
+              "caracteristicas": "={{ $('Code in Python').item.json.caracteristicas }}"
+            },
+            "matchingColumns": [
+              "nome"
+            ],
+            "schema": [
+              {
+                "id": "nome",
+                "displayName": "nome",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "preco",
+                "displayName": "preco",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "preco_promo",
+                "displayName": "preco_promo",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Categoria",
+                "displayName": "Categoria",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "caracteristicas",
+                "displayName": "caracteristicas",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "status",
+                "displayName": "status",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "row_number",
+                "displayName": "row_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "readOnly": true,
+                "removed": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          1248,
+          0
+        ],
+        "id": "7e799cbd-1617-4b64-814c-1f5a66ad57f4",
+        "name": "Update row in sheet",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "Pe8cycuCSn3iV1Mz",
+            "name": "Google Sheets account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "   https://graph.instagram.com/v21.0/17841476701574565/media",
+          "sendQuery": true,
+          "queryParameters": {
+            "parameters": [
+              {
+                "name": "image_url",
+                "value": "https://i.imgur.com/s5Vg3qO.jpeg"
+              },
+              {
+                "name": "caption",
+                "value": "={{ $('Code in Python1').item.json.legenda_final }}"
+              },
+              {
+                "name": "access_token",
+                "value": "SEU_TOKEN_AQUI"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.5,
+        "position": [
+          1472,
+          0
+        ],
+        "id": "17be8f9e-fa4f-431a-80fb-22f080689cc1",
+        "name": "HTTP Request"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "   https://graph.instagram.com/v21.0/17841476701574565/media_publish",
+          "sendQuery": true,
+          "queryParameters": {
+            "parameters": [
+              {
+                "name": "creation_id",
+                "value": "={{ $json.id }}"
+              },
+              {
+                "name": "access_token",
+                "value": "=SEU_TOKEN_AQUI"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.5,
+        "position": [
+          1696,
+          0
+        ],
+        "id": "8ac0e8cc-1fdd-4b19-9f37-653672f11571",
+        "name": "HTTP Request1"
+      }
+    ],
+    "connections": {
+      "Google Sheets Trigger": {
+        "main": [
+          [
+            {
+              "node": "Code in Python",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in Python": {
+        "main": [
+          [
+            {
+              "node": "Message a model",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Message a model": {
+        "main": [
+          [
+            {
+              "node": "Code in Python1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in Python1": {
+        "main": [
+          [
+            {
+              "node": "Send a message",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Send a message": {
+        "main": [
+          [
+            {
+              "node": "Update row in sheet",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Update row in sheet": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "nodeGroups": [],
+    "authors": "Bruno santos",
+    "name": "v2 - Publicação automática no Instagram",
+    "description": "Adiciona publicação automática no Instagram via Meta Graph API.\nFluxo completo: gatilho da planilha → organização dos dados (Python) →\ngeração da legenda com IA (Gemini) → validação e formatação (Python) →\ncriação do container de mídia (HTTP Request) → publicação no Instagram\n(HTTP Request) → envio por e-mail (Gmail) → atualização de status na planilha.\nTestado com produto de exemplo, publicação confirmada no Instagram.\nToken de acesso renovado por segurança.",
+    "autosaved": true,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-08-27T00:54:20.744Z",
+        "id": 5,
+        "workflowId": "ZLYwv9Eue3Rja5mC",
+        "versionId": "fc765111-0b77-47ed-8f73-f5d15d410af6",
+        "event": "activated",
+        "userId": "e30cfcb2-6bb6-4180-80eb-baaac60e677b"
+      }
+    ]
+  },
+  "homeProject": {
+    "id": "c3ashHQ4PwrbnZkR",
+    "type": "personal",
+    "name": "Bruno santos <brunosantosmo5@gmail.com>",
+    "icon": null
+  },
+  "sharedWithProjects": [],
+  "usedCredentials": [
+    {
+      "id": "8J14e3oyC3wBSbxl",
+      "name": "Google Gemini(PaLM) Api account",
+      "type": "googlePalmApi",
+      "currentUserHasAccess": true,
+      "homeProject": {
+        "id": "c3ashHQ4PwrbnZkR",
+        "type": "personal",
+        "name": "Bruno santos <brunosantosmo5@gmail.com>",
+        "icon": null
+      },
+      "sharedWithProjects": []
+    },
+    {
+      "id": "JNFYtzvfBAD5Xc2H",
+      "name": "Google Sheets Trigger account",
+      "type": "googleSheetsTriggerOAuth2Api",
+      "currentUserHasAccess": true,
+      "homeProject": {
+        "id": "c3ashHQ4PwrbnZkR",
+        "type": "personal",
+        "name": "Bruno santos <brunosantosmo5@gmail.com>",
+        "icon": null
+      },
+      "sharedWithProjects": []
+    },
+    {
+      "id": "Pe8cycuCSn3iV1Mz",
+      "name": "Google Sheets account",
+      "type": "googleSheetsOAuth2Api",
+      "currentUserHasAccess": true,
+      "homeProject": {
+        "id": "c3ashHQ4PwrbnZkR",
+        "type": "personal",
+        "name": "Bruno santos <brunosantosmo5@gmail.com>",
+        "icon": null
+      },
+      "sharedWithProjects": []
+    },
+    {
+      "id": "bZPEofkLC8ouPYHh",
+      "name": "Gmail account",
+      "type": "gmailOAuth2",
+      "currentUserHasAccess": true,
+      "homeProject": {
+        "id": "c3ashHQ4PwrbnZkR",
+        "type": "personal",
+        "name": "Bruno santos <brunosantosmo5@gmail.com>",
+        "icon": null
+      },
+      "sharedWithProjects": []
+    }
+  ],
+  "scopes": [
+    "execution:reveal",
+    "workflow:create",
+    "workflow:delete",
+    "workflow:disableRedaction",
+    "workflow:enableRedaction",
+    "workflow:execute",
+    "workflow:execute-chat",
+    "workflow:export",
+    "workflow:import",
+    "workflow:list",
+    "workflow:move",
+    "workflow:publish",
+    "workflow:read",
+    "workflow:share",
+    "workflow:unpublish",
+    "workflow:unshare",
+    "workflow:update"
+  ],
+  "checksum": "e3af40f815079921a0c904d4962597792993a5320896368b07fd949d80cc477a"
 }
